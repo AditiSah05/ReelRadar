@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
+const fs = require('fs');
 const movieRoutes = require('./routes/movies');
 const authRoutes = require('./routes/auth');
 
@@ -43,26 +44,31 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/movies', movieRoutes);
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Movie Search API is running 🎬' });
-});
-
 app.get('/healthz', (req, res) => {
   res.status(200).json({ ok: true });
 });
 
 if (process.env.NODE_ENV === 'production') {
   const clientDistPath = path.join(__dirname, '..', 'frontend', 'dist');
-  app.use(express.static(clientDistPath));
+  const clientIndexPath = path.join(clientDistPath, 'index.html');
+  const hasClientBuild = fs.existsSync(clientIndexPath);
 
-  app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api') || req.path === '/healthz') {
-      return next();
-    }
+  if (hasClientBuild) {
+    app.use(express.static(clientDistPath));
 
-    return res.sendFile(path.join(clientDistPath, 'index.html'));
-  });
+    app.get('*', (req, res, next) => {
+      if (req.path.startsWith('/api') || req.path === '/healthz') {
+        return next();
+      }
+
+      return res.sendFile(clientIndexPath);
+    });
+  }
 }
+
+app.get('/', (req, res) => {
+  res.json({ message: 'Movie Search API is running 🎬' });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
