@@ -26,8 +26,8 @@ function buildRows(homeFeed, favorites) {
   if (favorites.length > 0) {
     rows.push({
       id: 'my-list',
-      title: 'Your Watchlist',
-      description: 'The titles you marked for a better movie night.',
+      title: 'My List',
+      description: 'Saved titles ready to revisit.',
       items: favorites,
     });
   }
@@ -40,33 +40,33 @@ function buildRows(homeFeed, favorites) {
     ...rows,
     {
       id: 'popular',
-      title: 'Audience Favorites',
-      description: 'Popular picks people keep coming back to.',
-      items: homeFeed.popular.slice(0, 12),
+      title: 'Popular on ReelRadar',
+      description: 'Popular movies people are watching now.',
+      items: homeFeed.popular.slice(0, 18),
     },
     {
       id: 'trending-now',
-      title: 'What People Are Talking About',
-      description: 'The movies driving the loudest conversation right now.',
-      items: homeFeed.trending.slice(1, 13),
+      title: 'Trending Now',
+      description: 'Movies getting attention this week.',
+      items: homeFeed.trending.slice(1, 19),
     },
     {
       id: 'top-rated-picks',
-      title: 'Critical Darlings',
-      description: 'Highly rated films that hold up beyond the hype.',
-      items: homeFeed.topRated.slice(0, 12),
+      title: 'Top Picks',
+      description: 'High-rated titles worth a closer look.',
+      items: homeFeed.topRated.slice(0, 18),
     },
     {
       id: 'now-playing',
-      title: 'Playing This Week',
-      description: 'Fresh releases landing in theaters and watchlists.',
-      items: homeFeed.nowPlaying.slice(0, 12),
+      title: 'New Releases',
+      description: 'Recent releases currently making the rounds.',
+      items: homeFeed.nowPlaying.slice(0, 18),
     },
     {
       id: 'coming-soon',
-      title: 'Worth Waiting For',
-      description: 'Upcoming releases that already feel promising.',
-      items: homeFeed.upcoming.slice(0, 12),
+      title: 'Coming Soon',
+      description: 'Upcoming titles to keep on your list.',
+      items: homeFeed.upcoming.slice(0, 18),
     },
   ].filter((row) => row.items.length > 0);
 }
@@ -178,7 +178,7 @@ function Home() {
   const contentRows = !searchQuery ? buildRows(homeFeed, favorites) : [];
   const sectionTitle = searchQuery
     ? `Results for "${searchQuery}" — ${searchResults.length} found`
-    : 'Browse the Radar';
+    : '';
 
   useEffect(() => {
     if (!featuredMovie) {
@@ -291,7 +291,7 @@ function Home() {
             }}
           >
             <div className="featured-copy">
-              <p className="featured-label">Tonight&apos;s Spotlight</p>
+              <p className="featured-label">Featured</p>
               <h2 className="featured-title">{featuredMovie.title}</h2>
 
               <div className="featured-meta">
@@ -355,9 +355,9 @@ function Home() {
           </section>
         )}
 
-        <h1 className="hero-title">Pick a film with better odds</h1>
+        <h1 className="hero-title">Search the catalog</h1>
         <p className="hero-subtitle">
-          Skip the endless scrolling. Start with what&apos;s rising, what&apos;s loved, and what&apos;s actually worth your time.
+          Find a movie quickly, or keep browsing the rows below.
         </p>
         <SearchBar onSearch={handleSearch} />
         {searchQuery && (
@@ -369,7 +369,7 @@ function Home() {
       </div>
 
       <div className="movies-section">
-        <h2 className="section-title">{sectionTitle}</h2>
+        {sectionTitle && <h2 className="section-title">{sectionTitle}</h2>}
 
         {loading && !searchQuery && <div>{['row-one', 'row-two', 'row-three'].map(renderSkeletonRow)}</div>}
 

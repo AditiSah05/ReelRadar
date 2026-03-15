@@ -28,35 +28,16 @@ body,
 body {
   font-family: 'Manrope', 'Segoe UI', sans-serif;
   color: var(--text-primary);
-  background:
-    radial-gradient(circle at 14% 18%, rgba(188, 24, 35, 0.16) 0%, rgba(188, 24, 35, 0) 26%),
-    radial-gradient(circle at 82% 0%, rgba(120, 16, 22, 0.2) 0%, rgba(120, 16, 22, 0) 24%),
-    linear-gradient(180deg, #070707 0%, #0d0d0d 38%, #111111 100%);
+  background: #141414;
   overflow-x: hidden;
 }
 
 body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0) 22%),
-    radial-gradient(circle at 50% -12%, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 42%);
-  opacity: 0.95;
-  z-index: -2;
+  display: none;
 }
 
 body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.045) 0.7px, transparent 0.7px);
-  background-size: 4px 4px;
-  opacity: 0.045;
-  mix-blend-mode: soft-light;
-  z-index: -1;
+  display: none;
 }
 
 .icon {
@@ -76,16 +57,16 @@ body::after {
 
 .navbar {
   position: fixed;
-  top: 12px;
-  left: 12px;
-  right: 12px;
-  height: calc(var(--navbar-height) - 14px);
-  background: linear-gradient(180deg, rgba(15, 15, 15, 0.9) 0%, rgba(11, 11, 11, 0.82) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--navbar-height);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.42) 58%, rgba(0, 0, 0, 0) 100%);
+  border: none;
+  border-radius: 0;
   z-index: 1000;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.34);
-  backdrop-filter: blur(14px);
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
 .navbar-container {
@@ -121,12 +102,7 @@ body::after {
 }
 
 .brand-note {
-  font-size: 0.64rem;
-  line-height: 1;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.52);
-  margin-left: 4px;
+  display: none;
 }
 
 .navbar-links {
@@ -135,8 +111,8 @@ body::after {
 }
 
 .nav-link {
-  padding: 9px 15px;
-  border-radius: 999px;
+  padding: 8px 14px;
+  border-radius: 4px;
   text-decoration: none;
   color: var(--text-secondary);
   font-weight: 600;
@@ -150,20 +126,25 @@ body::after {
 
 .nav-link:hover {
   color: var(--text-primary);
-  border-color: rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.06);
+  border-color: transparent;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .nav-link.active {
   color: #fff;
-  border-color: rgba(229, 9, 20, 0.48);
-  background: linear-gradient(180deg, rgba(229, 9, 20, 0.24) 0%, rgba(229, 9, 20, 0.12) 100%);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  border-color: transparent;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
 }
 
 .main-content {
   margin-top: calc(var(--navbar-height) + 18px);
   min-height: calc(100vh - var(--navbar-height));
+}
+
+.home-page {
+  max-width: none;
+  padding: 0 0 68px;
 }
 
 .home-page,
@@ -264,22 +245,22 @@ body::after {
 }
 
 .hero-section {
-  text-align: center;
-  padding: 70px 0 52px;
+  text-align: left;
+  padding: 0 0 26px;
   animation: none;
 }
 
 .featured-panel {
   position: relative;
-  min-height: 520px;
-  margin-bottom: 44px;
-  padding: 48px;
-  border-radius: 22px;
-  border: 1px solid rgba(255, 255, 255, 0.11);
+  min-height: 74vh;
+  margin-bottom: 22px;
+  padding: 120px 4vw 84px;
+  border-radius: 0;
+  border: none;
   background-color: #111;
   background-position: center;
   background-size: cover;
-  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
+  box-shadow: none;
   display: flex;
   align-items: flex-end;
   text-align: left;
@@ -292,8 +273,8 @@ body::after {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.14) 24%, rgba(0, 0, 0, 0.64) 100%),
-    radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 26%);
+    linear-gradient(90deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.68) 34%, rgba(0, 0, 0, 0.2) 68%, rgba(0, 0, 0, 0.45) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(20, 20, 20, 0.9) 100%);
   pointer-events: none;
 }
 
@@ -301,8 +282,8 @@ body::after {
   content: '';
   position: absolute;
   inset: auto 0 0;
-  height: 42%;
-  background: linear-gradient(180deg, rgba(8, 8, 8, 0) 0%, rgba(8, 8, 8, 0.84) 100%);
+  height: 30%;
+  background: linear-gradient(180deg, rgba(20, 20, 20, 0) 0%, #141414 100%);
   pointer-events: none;
 }
 
@@ -324,9 +305,9 @@ body::after {
 
 .featured-title {
   font-family: 'Archivo', sans-serif;
-  font-size: clamp(3rem, 6.3vw, 5.5rem);
-  line-height: 0.9;
-  letter-spacing: -0.045em;
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
   margin-bottom: 18px;
   text-shadow: 0 16px 36px rgba(0, 0, 0, 0.38);
 }
@@ -358,8 +339,8 @@ body::after {
 
 .featured-primary-btn,
 .featured-secondary-btn {
-  padding: 13px 22px;
-  border-radius: 999px;
+  padding: 12px 22px;
+  border-radius: 4px;
   font-family: inherit;
   font-size: 0.94rem;
   font-weight: 700;
@@ -383,14 +364,14 @@ body::after {
 }
 
 .featured-secondary-btn {
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.09);
+  border: none;
+  background: rgba(109, 109, 110, 0.7);
   color: #ffffff;
-  backdrop-filter: blur(8px);
+  backdrop-filter: none;
 }
 
 .featured-secondary-btn.info {
-  background: rgba(255, 255, 255, 0.11);
+  background: rgba(109, 109, 110, 0.7);
 }
 
 .featured-secondary-btn:hover,
@@ -402,41 +383,39 @@ body::after {
 
 .hero-title {
   font-family: 'Archivo', sans-serif;
-  font-size: clamp(2.2rem, 5.9vw, 4rem);
-  letter-spacing: -0.04em;
-  line-height: 0.98;
-  margin-bottom: 16px;
-  max-width: 820px;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin: 0 4vw 10px;
+  max-width: 520px;
   text-wrap: balance;
-  text-shadow: 0 18px 44px rgba(0, 0, 0, 0.52);
+  text-shadow: none;
   animation: fade-up 700ms ease 90ms both;
 }
 
 .hero-subtitle {
-  font-size: 1rem;
-  color: #c2c2c2;
-  margin: 0 auto 32px;
-  max-width: 650px;
-  line-height: 1.7;
+  font-size: 0.94rem;
+  color: #b3b3b3;
+  margin: 0 4vw 18px;
+  max-width: 520px;
+  line-height: 1.6;
   animation: fade-up 700ms ease 150ms both;
 }
 
 .search-form {
-  max-width: 650px;
-  margin: 0 auto;
+  max-width: 520px;
+  margin: 0 4vw;
   animation: fade-up 700ms ease 260ms both;
 }
 
 .search-container {
   display: flex;
-  border-radius: 999px;
+  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  box-shadow: none;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(16, 16, 16, 0.76);
-  backdrop-filter: blur(12px);
+  background: rgba(22, 22, 22, 0.9);
+  backdrop-filter: none;
   transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
 }
 
@@ -482,7 +461,7 @@ body::after {
 }
 
 .clear-btn {
-  margin-top: 14px;
+  margin: 14px 4vw 0;
   padding: 8px 16px;
   background: rgba(255, 255, 255, 0.06);
   color: var(--text-secondary);
@@ -505,7 +484,8 @@ body::after {
 }
 
 .movies-section {
-  margin-top: 4px;
+  margin-top: 0;
+  padding: 0 4vw;
 }
 
 .row-stack {
@@ -517,7 +497,7 @@ body::after {
 .content-row {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
   opacity: 0;
   animation: fade-up 700ms ease forwards;
 }
@@ -586,15 +566,13 @@ body::after {
 
 .row-title {
   font-family: 'Archivo', sans-serif;
-  font-size: 1.08rem;
+  font-size: 1.22rem;
   font-weight: 600;
   letter-spacing: -0.015em;
 }
 
 .row-description {
-  font-size: 0.82rem;
-  line-height: 1.45;
-  color: #a8a8a8;
+  display: none;
 }
 
 .row-track-shell {
@@ -614,22 +592,22 @@ body::after {
 
 .row-track-shell::before {
   left: 0;
-  background: linear-gradient(90deg, #101010 0%, rgba(16, 16, 16, 0) 100%);
+  background: linear-gradient(90deg, #141414 0%, rgba(20, 20, 20, 0) 100%);
 }
 
 .row-track-shell::after {
   right: 0;
-  background: linear-gradient(270deg, #101010 0%, rgba(16, 16, 16, 0) 100%);
+  background: linear-gradient(270deg, #141414 0%, rgba(20, 20, 20, 0) 100%);
 }
 
 .row-track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(170px, 170px);
-  gap: 12px;
+  grid-auto-columns: minmax(250px, 250px);
+  gap: 6px;
   overflow-x: auto;
   overflow-y: visible;
-  padding: 2px 4px 8px;
+  padding: 8px 4px 18px;
   scroll-padding-inline: 8px;
   outline: none;
   scrollbar-width: thin;
@@ -652,6 +630,39 @@ body::after {
 .row-track::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.16);
   border-radius: 999px;
+}
+
+.home-page .row-track .movie-card {
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  box-shadow: none;
+  overflow: visible;
+  transform-origin: center center;
+}
+
+.home-page .row-track .movie-card::after,
+.home-page .row-track .fav-btn,
+.home-page .row-track .movie-rating,
+.home-page .row-track .movie-info {
+  display: none;
+}
+
+.home-page .row-track .movie-poster-wrapper {
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+}
+
+.home-page .row-track .movie-card:hover,
+.home-page .row-track .movie-card:focus-visible,
+.home-page .row-track .movie-card:focus-within {
+  transform: scale(1.1);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.48);
+  z-index: 4;
+}
+
+.home-page .row-track .movie-card-overlay {
+  padding: 14px 12px 12px;
 }
 
 .section-title {
@@ -1474,19 +1485,19 @@ body::after {
 
 @media (max-width: 900px) {
   .navbar {
-    top: 8px;
-    left: 8px;
-    right: 8px;
+    top: 0;
+    left: 0;
+    right: 0;
   }
 
   .hero-section {
-    padding: 58px 0 44px;
+    padding: 0 0 22px;
   }
 
   .featured-panel {
-    min-height: 390px;
-    padding: 30px 24px;
-    margin-bottom: 34px;
+    min-height: 58vh;
+    padding: 108px 24px 74px;
+    margin-bottom: 18px;
   }
 
   .detail-main {
@@ -1515,7 +1526,7 @@ body::after {
   }
 
   .row-track {
-    grid-auto-columns: 148px;
+    grid-auto-columns: 200px;
   }
 
   .navbar-container {
@@ -1546,17 +1557,17 @@ body::after {
   }
 
   .hero-title {
-    font-size: clamp(1.95rem, 10vw, 2.55rem);
+    font-size: 1.05rem;
   }
 
   .featured-panel {
-    min-height: 340px;
-    padding: 22px 18px;
-    border-radius: 18px;
+    min-height: 50vh;
+    padding: 92px 18px 54px;
+    border-radius: 0;
   }
 
   .featured-title {
-    font-size: 2rem;
+    font-size: 2.4rem;
   }
 
   .row-title {
