@@ -67,7 +67,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Movie Search API is running 🎬' });
+  res.json({ message: 'Movie Search API is running' });
 });
 
 app.listen(PORT, () => {

@@ -1,84 +1,72 @@
 # ReelRadar
 
-ReelRadar is a semester project that recreates the feel of a modern streaming platform using the MERN development approach. The application allows users to browse movies, search titles, open detailed movie pages, watch trailers, and maintain a personal list of saved movies without requiring a database. Movie data is provided through the TMDB API, while the frontend experience is designed to resemble a premium streaming service interface.
+ReelRadar is a full-stack movie discovery application built as a semester project using a MERN-style architecture without a database. The project combines a React frontend, an Express backend, TMDB API integration, and browser-based local persistence to deliver a polished streaming-style browsing experience.
 
-## Abstract
+## Live Deployment
 
-The goal of this project is to build a full-stack movie discovery application with a clean separation between frontend and backend responsibilities. The frontend is developed with React and Vite, while the backend is built using Node.js and Express. Instead of storing content in a local database, the application consumes TMDB as an external API source and uses browser localStorage for lightweight user-side persistence.
+Production URL: https://reelradar-yf5g.onrender.com/
 
-## Project Summary
+## Overview
+
+ReelRadar focuses on fast movie discovery. Users can browse curated categories, search titles, open a detailed movie page, watch trailers, and maintain a personal watchlist. Instead of storing data in a database, the application uses TMDB as the external movie source and saves watchlist data in localStorage.
+
+## Project Snapshot
 
 | Property | Details |
 |----------|---------|
 | Project Name | ReelRadar |
 | Project Type | Semester Project |
-| Development Style | MERN-style application |
-| Frontend | React 18, Vite, React Router |
+| Architecture | MERN-style without database |
+| Frontend | React 18, Vite, React Router DOM |
 | Backend | Node.js, Express.js |
-| API Source | TMDB API |
-| Local Persistence | localStorage |
-| Interface Style | Netflix-inspired streaming UI |
+| Data Source | TMDB API |
+| Persistence | Browser localStorage |
+| Deployment | Single Render web service |
 
-## Objectives
+## Core Features
 
-- Build a responsive movie browsing platform with separate frontend and backend layers.
-- Integrate a third-party movie API and expose controlled backend routes.
-- Create a streaming-style user interface with featured content and category rows.
-- Implement search, movie details, trailer playback, and user favorites.
-- Deliver a project suitable for semester presentation and demonstration.
+- Streaming-style homepage with a featured spotlight section.
+- Editorial movie rows such as Audience Favorites, Critical Darlings, and Worth Waiting For.
+- Search flow with clear reset behavior.
+- Movie detail page with trailer support, cast information, and metadata.
+- Watchlist management stored locally in the browser.
+- Premium, cinematic interface with keyboard-accessible navigation.
 
-## Major Features
-
-### 1. Home Page
-- Featured movie hero section with large backdrop banner.
-- Category-based rows such as Popular, Trending, Top Rated, Now Playing, and Coming Soon.
-- Personalized My List row based on saved favorites.
-- Search bar with result count and reset option.
-- Skeleton loading placeholders for a smoother interface.
-
-### 2. Movie Detail Page
-- Poster, title, tagline, rating, year, runtime, and genres.
-- Full movie overview.
-- Cast section with actor images.
-- Trailer access and favorites toggle.
-
-### 3. Favorites Functionality
-- Add and remove movies from a personal list.
-- Store favorites in browser localStorage.
-- Keep favorites available after page refresh.
-
-### 4. UI and Branding
-- Dark streaming-platform inspired interface.
-- Horizontal browse rows and hover preview overlays.
-- Featured trailer modal on the home page.
-- Custom ReelRadar branding with wordmark and app icon.
-
-## System Architecture
+## Tech Stack
 
 ### Frontend
-- React handles the user interface and routing.
-- Vite provides the development server and build pipeline.
-- Axios is used for communication with the backend API.
+
+- React
+- Vite
+- React Router DOM
+- Axios
+- Custom CSS
 
 ### Backend
-- Express provides REST endpoints for movie data.
-- Axios is used server-side to communicate with TMDB.
-- Environment variables protect the TMDB API key.
 
-### Data Flow
-1. The frontend sends requests to the Express backend.
-2. The backend calls TMDB and filters responses into app-specific endpoints.
-3. The frontend renders categories, movie details, and search results.
-4. Favorites are stored locally in the browser.
+- Node.js
+- Express.js
+- Axios
+- CORS
+- dotenv
+
+## Application Flow
+
+1. The React frontend requests data from the Express backend.
+2. The backend communicates with TMDB using protected server-side API access.
+3. The backend returns filtered movie data through app-specific routes.
+4. The frontend renders featured content, category rows, search results, and movie details.
+5. The watchlist is saved in localStorage and restored on refresh.
 
 ## API Endpoints
 
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| GET | `/api/movies/home` | Returns the category-based home feed |
-| GET | `/api/movies/trending` | Returns weekly trending movies |
-| GET | `/api/movies/search?query=name` | Searches movies by title |
-| GET | `/api/movies/:id` | Returns movie details with videos and credits |
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/healthz` | Health check for deployment monitoring |
+| GET | `/api/movies/home` | Aggregated homepage movie categories |
+| GET | `/api/movies/trending` | Weekly trending movies |
+| GET | `/api/movies/search?query=name` | Movie search by title |
+| GET | `/api/movies/:id` | Movie details with videos and credits |
 
 ## Project Structure
 
@@ -86,131 +74,116 @@ The goal of this project is to build a full-stack movie discovery application wi
 MEARN PROJECT/
 ├── backend/
 │   ├── server.js
-│   ├── .env
 │   ├── package.json
 │   └── routes/
+│       ├── auth.js
 │       └── movies.js
-└── frontend/
-    ├── index.html
-    ├── public/
-    │   ├── reelradar-icon.svg
-    │   └── reelradar-wordmark.svg
-    ├── vite.config.js
-    ├── package.json
-    └── src/
-        ├── main.jsx
-        ├── App.jsx
-        ├── index.css
-        ├── components/
-        │   ├── Icons.jsx
-        │   ├── Navbar.jsx
-        │   ├── SearchBar.jsx
-        │   └── MovieCard.jsx
-        └── pages/
-            ├── Home.jsx
-            ├── Favorites.jsx
-            └── MovieDetail.jsx
+├── frontend/
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── public/
+│   │   ├── reelradar-icon.svg
+│   │   └── reelradar-wordmark.svg
+│   └── src/
+│       ├── App.jsx
+│       ├── main.jsx
+│       ├── index.css
+│       ├── components/
+│       └── pages/
+├── render.yaml
+└── README.md
 ```
 
-## Setup Instructions
+## Local Development
 
 ### Prerequisites
-- Node.js v18 or above
-- A free TMDB API key from [https://www.themoviedb.org/settings/api](https://www.themoviedb.org/settings/api)
 
-### Step 1: Configure Environment Variables
-Update the backend environment file:
+- Node.js 18 or newer
+- A TMDB API key
+
+### Environment Variables
+
+Create or update `backend/.env` with:
 
 ```env
 TMDB_API_KEY=your_tmdb_api_key_here
 PORT=5000
 ```
 
-### Step 2: Start the Backend
+### Run Backend
 
 ```bash
 cd backend
+npm install
 npm run dev
 ```
 
-Backend URL: `http://localhost:5000`
+Backend runs on `http://localhost:5000`
 
-### Step 3: Start the Frontend
+### Run Frontend
 
 ```bash
 cd frontend
+npm install
 npm run dev
 ```
 
-Frontend URL: `http://localhost:5173`
+Frontend runs on `http://localhost:5173`
 
-## Deploy On Render
+## Render Deployment
 
-This repository is ready for a single Render Web Service deployment using [render.yaml](render.yaml).
+This repository is configured for a single Render deployment where one Node service serves both the backend API and the built frontend.
 
-### 1. Push This Project To GitHub
-- Commit your latest changes.
-- Push the repository to GitHub.
+### Render Service Configuration
 
-### 2. Create Service In Render
-- In Render dashboard, choose `New +` -> `Blueprint`.
-- Select this repository.
-- Render will detect [render.yaml](render.yaml) and create one service:
-    - `reelradar` (Node web service serving API + frontend)
+- Environment: `Node`
+- Root Directory: leave empty
+- Build Command:
 
-### 3. Set Required Environment Variables
+```bash
+npm install --prefix backend && npm install --prefix frontend --include=dev && npm run build --prefix frontend
+```
 
-For `reelradar`:
-- `TMDB_API_KEY` = your TMDB key
-- `FRONTEND_ORIGINS` = optional comma-separated allowed origins
-: example `https://reelradar.onrender.com`
+- Start Command:
 
-### 4. Redeploy
-- Trigger deploy after adding env vars.
-- Open your single service URL from `reelradar`.
+```bash
+npm start --prefix backend
+```
 
-### Notes
-- Backend health check endpoint: `/healthz`
-- In production, backend serves built frontend from `frontend/dist`.
-- API and frontend run under the same Render domain.
+### Required Render Environment Variables
 
-## Dependencies
+```env
+TMDB_API_KEY=your_tmdb_api_key_here
+NODE_ENV=production
+FRONTEND_ORIGINS=https://reelradar-yf5g.onrender.com
+```
 
-### Backend Packages
-| Package | Purpose |
-|---------|---------|
-| express | Server and routing |
-| axios | HTTP requests to TMDB |
-| cors | Cross-origin handling |
-| dotenv | Environment variable loading |
-| nodemon | Development auto-restart |
+### Deployment Notes
 
-### Frontend Packages
-| Package | Purpose |
-|---------|---------|
-| react | UI rendering |
-| react-dom | DOM integration |
-| react-router-dom | Routing |
-| axios | API requests |
-| vite | Build and dev tooling |
+- The backend exposes `/healthz` for service health checks.
+- In production, Express serves the frontend build from `frontend/dist`.
+- Frontend and backend run under the same Render domain.
 
-## Security Notes
+## UI Notes
 
-- The TMDB API key is stored on the backend, not exposed directly in frontend code.
-- The frontend communicates only with the Express API.
-- Movie ID validation is handled before backend detail requests are made.
-- CORS is restricted for local development usage.
+The interface is designed to feel more like a curated movie product than a generic API demo. The homepage combines a featured spotlight area with editorial row naming, while the rest of the UI emphasizes clarity, cinematic depth, and quick browsing.
 
-## Branding Assets
+## Security and Implementation Notes
 
-- App Icon: `frontend/public/reelradar-icon.svg`
-- Navbar Wordmark: `frontend/public/reelradar-wordmark.svg`
+- The TMDB API key stays on the backend.
+- The frontend never directly exposes TMDB credentials.
+- Movie detail requests validate numeric IDs before proxying requests.
+- Watchlist data is stored locally per browser.
+- CORS supports local development and Render deployment origins.
 
-## Conclusion
+## Future Improvements
 
-ReelRadar demonstrates how a modern entertainment-style web application can be built using a React frontend, Express backend, and an external API source without requiring a full database setup. The project combines functional backend integration with a polished user interface and is suitable for academic demonstration as a full-stack semester submission.
+- Remove the unused auth route if the project remains watchlist-only.
+- Add automated tests for backend route responses.
+- Add better loading and error telemetry for production.
+- Add pagination or infinite scrolling for long result sets.
 
 ## Author
 
-Semester Project Submission  
-Year: 2026
+Semester Project Submission
+2026
