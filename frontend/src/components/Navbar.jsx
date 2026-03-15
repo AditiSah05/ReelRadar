@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { HeartIcon } from './Icons';
+import { FilmIcon, HeartIcon } from './Icons';
 
 function Navbar() {
   const location = useLocation();
@@ -19,6 +19,13 @@ function Navbar() {
             className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
           >
             Home
+          </Link>
+          <Link
+            to="/movies"
+            className={`nav-link ${location.pathname === '/movies' ? 'active' : ''}`}
+          >
+            <FilmIcon className="icon" size={17} />
+            <span>Movies</span>
           </Link>
           <Link
             to="/favorites"
