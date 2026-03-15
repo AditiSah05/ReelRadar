@@ -27,6 +27,7 @@ ReelRadar focuses on fast movie discovery. Users can browse curated categories, 
 
 - Streaming-style homepage with a featured spotlight section.
 - Editorial movie rows such as Audience Favorites, Critical Darlings, and Worth Waiting For.
+- Dedicated Movies page with category switching and genre filtering.
 - Search flow with clear reset behavior.
 - Movie detail page with trailer support, cast information, and metadata.
 - Watchlist management stored locally in the browser.

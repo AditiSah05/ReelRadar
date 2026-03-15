@@ -3,37 +3,8 @@ import axios from 'axios';
 import MovieCard from '../components/MovieCard';
 import { FilmIcon, WarningIcon } from '../components/Icons';
 
-const movieCategories = [
-  {
-    id: 'popular',
-    label: 'Audience Favorites',
-    description: 'The titles people keep returning to.',
-  },
-  {
-    id: 'trending',
-    label: 'Trending',
-    description: 'What is getting attention this week.',
-  },
-  {
-    id: 'topRated',
-    label: 'Top Rated',
-    description: 'High-scoring films with lasting appeal.',
-  },
-  {
-    id: 'nowPlaying',
-    label: 'Now Playing',
-    description: 'Recent releases currently in circulation.',
-  },
-  {
-    id: 'upcoming',
-    label: 'Coming Soon',
-    description: 'Upcoming releases worth keeping an eye on.',
-  },
-];
-
 function Movies() {
   const [homeFeed, setHomeFeed] = useState(null);
-  const [activeCategory, setActiveCategory] = useState('popular');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -43,8 +14,8 @@ function Movies() {
       setError('');
 
       try {
-        const { data } = await axios.get('/api/movies/home');
-        setHomeFeed(data);
+        const { data: feedData } = await axios.get('/api/movies/home');
+        setHomeFeed(feedData);
       } catch {
         setError('Unable to load movies right now. Please try again in a moment.');
       } finally {
@@ -55,31 +26,19 @@ function Movies() {
     fetchMovies();
   }, []);
 
-  const activeConfig = movieCategories.find((category) => category.id === activeCategory);
-  const movies = homeFeed?.[activeCategory] || [];
+  const movies = homeFeed
+    ? Object.values(homeFeed)
+        .flat()
+        .filter((movie, index, array) => array.findIndex((item) => item.id === movie.id) === index)
+    : [];
 
   return (
     <div className="movies-page">
       <div className="movies-page-header">
         <h1 className="page-title">Movies</h1>
         <p className="movies-page-subtitle">
-          Browse a wider catalog by category and jump straight into the titles that match your mood.
+          Browse a wider catalog of films collected from the latest popular, trending, and upcoming releases.
         </p>
-      </div>
-
-      <div className="movie-filter-bar" role="tablist" aria-label="Movie categories">
-        {movieCategories.map((category) => (
-          <button
-            key={category.id}
-            type="button"
-            className={`movie-filter-btn ${activeCategory === category.id ? 'active' : ''}`}
-            onClick={() => setActiveCategory(category.id)}
-            role="tab"
-            aria-selected={activeCategory === category.id}
-          >
-            {category.label}
-          </button>
-        ))}
       </div>
 
       {loading && (
@@ -99,10 +58,12 @@ function Movies() {
         <section className="movies-catalog-section">
           <div className="movies-catalog-head">
             <div>
-              <h2 className="section-title">{activeConfig?.label}</h2>
-              <p className="movies-catalog-copy">{activeConfig?.description}</p>
+              <h2 className="section-title">Movie Catalog</h2>
+              <p className="movies-catalog-copy">A broader collection of titles gathered into one place.</p>
             </div>
-            <div className="movies-count-pill">{movies.length} titles</div>
+            <div className="movies-count-pill">
+              {movies.length} {movies.length === 1 ? 'title' : 'titles'}
+            </div>
           </div>
 
           {movies.length > 0 ? (

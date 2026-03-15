@@ -1114,38 +1114,6 @@ body::after {
   line-height: 1.7;
 }
 
-.movie-filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 28px;
-}
-
-.movie-filter-btn {
-  padding: 10px 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-secondary);
-  font-family: inherit;
-  font-size: 0.88rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 180ms ease;
-}
-
-.movie-filter-btn:hover {
-  color: var(--text-primary);
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.movie-filter-btn.active {
-  color: #ffffff;
-  border-color: rgba(229, 9, 20, 0.44);
-  background: linear-gradient(180deg, rgba(229, 9, 20, 0.24) 0%, rgba(229, 9, 20, 0.12) 100%);
-}
-
 .movies-catalog-section {
   display: flex;
   flex-direction: column;

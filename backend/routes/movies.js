@@ -43,6 +43,15 @@ router.get('/home', async (req, res) => {
   }
 });
 
+router.get('/genres', async (req, res) => {
+  try {
+    const data = await fetchTmdb('/genre/movie/list');
+    res.json({ genres: data.genres || [] });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch movie genres' });
+  }
+});
+
 // GET /api/movies/trending
 router.get('/trending', async (req, res) => {
   try {
