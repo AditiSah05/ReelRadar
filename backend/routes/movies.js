@@ -23,12 +23,28 @@ const fetchTmdb = async (path, params = {}) => {
 
 router.get('/home', async (req, res) => {
   try {
-    const [trending, popular, topRated, nowPlaying, upcoming] = await Promise.all([
+    const [
+      trending,
+      popular,
+      topRated,
+      nowPlaying,
+      upcoming,
+      action,
+      comedy,
+      drama,
+      scifi,
+      animation,
+    ] = await Promise.all([
       fetchTmdb('/trending/movie/week'),
       fetchTmdb('/movie/popular'),
       fetchTmdb('/movie/top_rated'),
       fetchTmdb('/movie/now_playing'),
       fetchTmdb('/movie/upcoming'),
+      fetchTmdb('/discover/movie', { with_genres: 28, sort_by: 'popularity.desc' }),
+      fetchTmdb('/discover/movie', { with_genres: 35, sort_by: 'popularity.desc' }),
+      fetchTmdb('/discover/movie', { with_genres: 18, sort_by: 'vote_average.desc', 'vote_count.gte': 1000 }),
+      fetchTmdb('/discover/movie', { with_genres: 878, sort_by: 'popularity.desc' }),
+      fetchTmdb('/discover/movie', { with_genres: 16, sort_by: 'popularity.desc' }),
     ]);
 
     res.json({
@@ -37,6 +53,11 @@ router.get('/home', async (req, res) => {
       topRated: topRated.results || [],
       nowPlaying: nowPlaying.results || [],
       upcoming: upcoming.results || [],
+      action: action.results || [],
+      comedy: comedy.results || [],
+      drama: drama.results || [],
+      scifi: scifi.results || [],
+      animation: animation.results || [],
     });
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch home page movies' });

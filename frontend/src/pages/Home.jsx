@@ -51,10 +51,22 @@ function buildRows(homeFeed, favorites) {
       items: homeFeed.trending.slice(1, 19),
     },
     {
+      id: 'action',
+      title: 'Action & Adventure',
+      description: 'High-octane films built around movement and stakes.',
+      items: (homeFeed.action || []).slice(0, 18),
+    },
+    {
       id: 'top-rated-picks',
       title: 'Top Picks',
       description: 'High-rated titles worth a closer look.',
       items: homeFeed.topRated.slice(0, 18),
+    },
+    {
+      id: 'comedy',
+      title: 'Comedy',
+      description: 'Something light for when you need a break.',
+      items: (homeFeed.comedy || []).slice(0, 18),
     },
     {
       id: 'now-playing',
@@ -63,10 +75,28 @@ function buildRows(homeFeed, favorites) {
       items: homeFeed.nowPlaying.slice(0, 18),
     },
     {
+      id: 'drama',
+      title: 'Drama',
+      description: 'Stories that stay with you long after the credits.',
+      items: (homeFeed.drama || []).slice(0, 18),
+    },
+    {
+      id: 'scifi',
+      title: 'Science Fiction',
+      description: 'Worlds, futures, and ideas beyond the ordinary.',
+      items: (homeFeed.scifi || []).slice(0, 18),
+    },
+    {
       id: 'coming-soon',
       title: 'Coming Soon',
       description: 'Upcoming titles to keep on your list.',
       items: homeFeed.upcoming.slice(0, 18),
+    },
+    {
+      id: 'animation',
+      title: 'Animation',
+      description: 'Animated films for every mood and age.',
+      items: (homeFeed.animation || []).slice(0, 18),
     },
   ].filter((row) => row.items.length > 0);
 }
