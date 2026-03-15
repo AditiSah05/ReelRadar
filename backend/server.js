@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 const movieRoutes = require('./routes/movies');
 const authRoutes = require('./routes/auth');
 
@@ -19,11 +20,17 @@ const allowedOrigins = [
     .filter(Boolean),
 ];
 
+const onRenderOriginPattern = /^https:\/\/[a-z0-9-]+\.onrender\.com$/i;
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow non-browser requests and explicitly allowed browser origins.
-      if (!origin || allowedOrigins.includes(origin)) {
+      // Allow non-browser requests and safe browser origins.
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        onRenderOriginPattern.test(origin)
+      ) {
         return callback(null, true);
       }
 
@@ -43,6 +50,19 @@ app.get('/', (req, res) => {
 app.get('/healthz', (req, res) => {
   res.status(200).json({ ok: true });
 });
+
+if (process.env.NODE_ENV === 'production') {
+  const clientDistPath = path.join(__dirname, '..', 'frontend', 'dist');
+  app.use(express.static(clientDistPath));
+
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path === '/healthz') {
+      return next();
+    }
+
+    return res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

@@ -146,38 +146,33 @@ Frontend URL: `http://localhost:5173`
 
 ## Deploy On Render
 
-This repository is ready for Render Blueprint deployment using [render.yaml](render.yaml).
+This repository is ready for a single Render Web Service deployment using [render.yaml](render.yaml).
 
 ### 1. Push This Project To GitHub
 - Commit your latest changes.
 - Push the repository to GitHub.
 
-### 2. Create Services In Render
+### 2. Create Service In Render
 - In Render dashboard, choose `New +` -> `Blueprint`.
 - Select this repository.
-- Render will detect [render.yaml](render.yaml) and create:
-    - `reelradar-api` (Node web service)
-    - `reelradar-web` (static site)
+- Render will detect [render.yaml](render.yaml) and create one service:
+    - `reelradar` (Node web service serving API + frontend)
 
 ### 3. Set Required Environment Variables
 
-For `reelradar-api`:
+For `reelradar`:
 - `TMDB_API_KEY` = your TMDB key
-- `FRONTEND_ORIGINS` = your frontend Render URL
-: example `https://reelradar-web.onrender.com`
-
-For `reelradar-web`:
-- `VITE_API_BASE_URL` = your backend Render URL
-: example `https://reelradar-api.onrender.com`
+- `FRONTEND_ORIGINS` = optional comma-separated allowed origins
+: example `https://reelradar.onrender.com`
 
 ### 4. Redeploy
-- Trigger deploy for both services after adding env vars.
-- Open frontend URL from `reelradar-web` service.
+- Trigger deploy after adding env vars.
+- Open your single service URL from `reelradar`.
 
 ### Notes
 - Backend health check endpoint: `/healthz`
-- CORS in backend supports local dev ports and `FRONTEND_ORIGINS` for production.
-- Frontend API calls use `VITE_API_BASE_URL` in production.
+- In production, backend serves built frontend from `frontend/dist`.
+- API and frontend run under the same Render domain.
 
 ## Dependencies
 
